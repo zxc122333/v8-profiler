@@ -1,0 +1,46 @@
+0 info it worked if it ends with ok
+1 verbose cli [ 'node',
+1 verbose cli   'c:\\Users\\sqh\\AppData\\Roaming\\npm\\node_modules\\cnpm\\node_modules\\npm\\bin\\npm-cli.js',
+1 verbose cli   '--userconfig=c:\\Users\\sqh\\.cnpmrc',
+1 verbose cli   '--disturl=http://npm.taobao.org/dist',
+1 verbose cli   '--cache=c:\\Users\\sqh\\.npm\\.cache_cnpm',
+1 verbose cli   '--registry=http://registry.npm.taobao.org',
+1 verbose cli   'install' ]
+2 info using npm@1.4.10
+3 info using node@v0.11.13
+4 warn invalid config proxy=""
+5 warn invalid config Must be a full url with 'http://'
+6 warn package.json v8-profiler@4.0.1 No repository field.
+7 verbose readDependencies using package.json deps
+8 verbose install where, deps [ 'E:\\git\\v8-profiler', [ 'nan' ] ]
+9 info preinstall v8-profiler@4.0.1
+10 verbose readDependencies using package.json deps
+11 verbose already installed skipping nan@~1.0.0 E:\git\v8-profiler
+12 silly resolved []
+13 info build E:\git\v8-profiler
+14 verbose linkStuff [ false, false, false, 'E:\\git' ]
+15 info linkStuff v8-profiler@4.0.1
+16 verbose linkBins v8-profiler@4.0.1
+17 verbose linkMans v8-profiler@4.0.1
+18 verbose rebuildBundles v8-profiler@4.0.1
+19 verbose rebuildBundles [ 'nan' ]
+20 info install v8-profiler@4.0.1
+21 verbose unsafe-perm in lifecycle true
+22 info v8-profiler@4.0.1 Failed to exec install script
+23 error v8-profiler@4.0.1 install: `node-gyp rebuild`
+23 error Exit status 1
+24 error Failed at the v8-profiler@4.0.1 install script.
+24 error This is most likely a problem with the v8-profiler package,
+24 error not with npm itself.
+24 error Tell the author that this fails on your system:
+24 error     node-gyp rebuild
+24 error You can get their info via:
+24 error     npm owner ls v8-profiler
+24 error There is likely additional logging output above.
+25 error System Windows_NT 6.2.9200
+26 error command "node" "c:\\Users\\sqh\\AppData\\Roaming\\npm\\node_modules\\cnpm\\node_modules\\npm\\bin\\npm-cli.js" "--userconfig=c:\\Users\\sqh\\.cnpmrc" "--disturl=http://npm.taobao.org/dist" "--cache=c:\\Users\\sqh\\.npm\\.cache_cnpm" "--registry=http://registry.npm.taobao.org" "install"
+27 error cwd E:\git\v8-profiler
+28 error node -v v0.11.13
+29 error npm -v 1.4.10
+30 error code ELIFECYCLE
+31 verbose exit [ 1, true ]

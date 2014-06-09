@@ -8,19 +8,19 @@ namespace nodex {
         public:
             ActivityControlAdapter(Handle<Value> progress)
                 :   reportProgress(Handle<Function>::Cast(progress)),
-                    abort(NanNewLocal<Value>(Boolean::New(false))) {}
+                    abort(NanNew<Value>(NanNew<Boolean>(false))) {}
 
             ControlOption ReportProgressValue(int done, int total) {
                 NanScope();
 
                 Local<Value> argv[2] = {
-                    Integer::New(done),
-                    Integer::New(total)
+                    NanNew<Integer>(done),
+                    NanNew<Integer>(total)
                 };
 
                 TryCatch try_catch;
 
-                abort = reportProgress->Call(Context::GetCurrent()->Global(), 2, argv);
+                abort = reportProgress->Call(NanGetCurrentContext()->Global(), 2, argv);
 
                 if (try_catch.HasCaught()) {
                     FatalException(try_catch);
@@ -44,8 +44,8 @@ namespace nodex {
     void HeapProfiler::Initialize(Handle<Object> target) {
         NanScope();
 
-        Local<ObjectTemplate> tpl = NanNewLocal<ObjectTemplate>(ObjectTemplate::New());
-        NanAssignPersistent(ObjectTemplate, heap_profiler_template_, tpl);
+        Local<ObjectTemplate> tpl = NanNew<ObjectTemplate>(ObjectTemplate::New());
+        NanAssignPersistent(heap_profiler_template_, tpl);
         tpl->SetInternalFieldCount(1);
 
         Local<Object> heapProfilerObj = tpl->NewInstance();
@@ -56,7 +56,7 @@ namespace nodex {
         NODE_SET_METHOD(heapProfilerObj, "getSnapshotsCount", HeapProfiler::GetSnapshotsCount);
         NODE_SET_METHOD(heapProfilerObj, "deleteAllSnapshots", HeapProfiler::DeleteAllSnapshots);
 
-        target->Set(String::NewSymbol("heapProfiler"), heapProfilerObj);
+        target->Set(NanNew<String>("heapProfiler"), heapProfilerObj);
     }
 
     HeapProfiler::HeapProfiler() {}

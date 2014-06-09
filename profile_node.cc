@@ -7,19 +7,19 @@ namespace nodex {
 Persistent<ObjectTemplate> ProfileNode::node_template_;
 
 void ProfileNode::Initialize() {
-  Local<ObjectTemplate> tpl = NanNewLocal<ObjectTemplate>(ObjectTemplate::New());
-  NanAssignPersistent(ObjectTemplate, node_template_, tpl);
+  Local<ObjectTemplate> tpl = NanNew<ObjectTemplate>(ObjectTemplate::New());
+  NanAssignPersistent(node_template_, tpl);
   tpl->SetInternalFieldCount(1);
-  tpl->SetAccessor(String::New("functionName"), ProfileNode::GetFunctionName);
-  tpl->SetAccessor(String::New("scriptName"), ProfileNode::GetScriptName);
-  tpl->SetAccessor(String::New("lineNumber"), ProfileNode::GetLineNumber);
-  tpl->SetAccessor(String::New("totalTime"), ProfileNode::GetTotalTime);
-  tpl->SetAccessor(String::New("selfTime"), ProfileNode::GetSelfTime);
-  tpl->SetAccessor(String::New("totalSamplesCount"), ProfileNode::GetTotalSamplesCount);
-  tpl->SetAccessor(String::New("selfSamplesCount"), ProfileNode::GetSelfSamplesCount);
-  tpl->SetAccessor(String::New("callUid"), ProfileNode::GetCallUid);
-  tpl->SetAccessor(String::New("childrenCount"), ProfileNode::GetChildrenCount);
-  tpl->Set(String::New("getChild"), FunctionTemplate::New(ProfileNode::GetChild));
+  tpl->SetAccessor(NanNew<String>("functionName"), ProfileNode::GetFunctionName);
+  tpl->SetAccessor(NanNew<String>("scriptName"), ProfileNode::GetScriptName);
+  tpl->SetAccessor(NanNew<String>("lineNumber"), ProfileNode::GetLineNumber);
+  tpl->SetAccessor(NanNew<String>("totalTime"), ProfileNode::GetTotalTime);
+  tpl->SetAccessor(NanNew<String>("selfTime"), ProfileNode::GetSelfTime);
+  tpl->SetAccessor(NanNew<String>("totalSamplesCount"), ProfileNode::GetTotalSamplesCount);
+  tpl->SetAccessor(NanNew<String>("selfSamplesCount"), ProfileNode::GetSelfSamplesCount);
+  tpl->SetAccessor(NanNew<String>("callUid"), ProfileNode::GetCallUid);
+  tpl->SetAccessor(NanNew<String>("childrenCount"), ProfileNode::GetChildrenCount);
+  tpl->Set(NanNew<String>("getChild"), NanNew<FunctionTemplate>(ProfileNode::GetChild));
 }
 
 NAN_GETTER(ProfileNode::GetFunctionName) {
@@ -43,7 +43,7 @@ NAN_GETTER(ProfileNode::GetLineNumber) {
   Local<Object> self = args.Holder();
   void* ptr = NanGetInternalFieldPointer(self, 0);
   int32_t ln = static_cast<CpuProfileNode*>(ptr)->GetLineNumber();
-  NanReturnValue(Integer::New(ln));
+  NanReturnValue(NanNew<Integer>(ln));
 }
 
 NAN_GETTER(ProfileNode::GetTotalTime) {
@@ -91,7 +91,7 @@ NAN_GETTER(ProfileNode::GetSelfSamplesCount) {
 #else
   double samples = static_cast<CpuProfileNode*>(ptr)->GetSelfSamplesCount();
 #endif
-  NanReturnValue(Number::New(samples));
+  NanReturnValue(NanNew<Number>(samples));
 }
 
 NAN_GETTER(ProfileNode::GetCallUid) {
@@ -99,7 +99,7 @@ NAN_GETTER(ProfileNode::GetCallUid) {
   Local<Object> self = args.Holder();
   void* ptr = NanGetInternalFieldPointer(self, 0);
   uint32_t uid = static_cast<CpuProfileNode*>(ptr)->GetCallUid();
-  NanReturnValue(Integer::NewFromUnsigned(uid));
+  NanReturnValue(Integer::NewFromUnsigned(v8::Isolate::GetCurrent(),uid));
 }
 
 NAN_GETTER(ProfileNode::GetChildrenCount) {

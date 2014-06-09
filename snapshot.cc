@@ -102,7 +102,7 @@ class OutputStreamAdapter : public v8::OutputStream {
       }
 
       if (!obj->Get(onEnd)->IsFunction() || !obj->Get(onData)->IsFunction()) {
-        ThrowException(Exception::TypeError(
+        NANThrow(Exception::TypeError(
           String::New("Properties 'onData' and 'onEnd' have to be functions")));
       }
 

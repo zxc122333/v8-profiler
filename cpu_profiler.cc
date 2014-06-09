@@ -7,8 +7,8 @@ namespace nodex {
     void CpuProfiler::Initialize(Handle<Object> target) {
         NanScope();
 
-        Local<ObjectTemplate> tpl = NanNewLocal<ObjectTemplate>(ObjectTemplate::New());
-        NanAssignPersistent(ObjectTemplate, cpu_profiler_template_, tpl);
+        Local<ObjectTemplate> tpl = NanNew<ObjectTemplate>(ObjectTemplate::New());
+        NanAssignPersistent(cpu_profiler_template_, tpl);
         tpl->SetInternalFieldCount(1);
 
         Local<Object> cpuProfilerObj = tpl->NewInstance();

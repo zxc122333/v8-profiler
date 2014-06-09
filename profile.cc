@@ -8,14 +8,14 @@ namespace nodex {
 Persistent<ObjectTemplate> Profile::profile_template_;
 
 void Profile::Initialize() {
-  Local<ObjectTemplate> tpl = NanNewLocal<ObjectTemplate>(ObjectTemplate::New());
-  NanAssignPersistent(ObjectTemplate, profile_template_, tpl);
+  Local<ObjectTemplate> tpl = NanNew<ObjectTemplate>(ObjectTemplate::New());
+  NanAssignPersistent(profile_template_, tpl);
   tpl->SetInternalFieldCount(1);
-  tpl->SetAccessor(String::New("title"), Profile::GetTitle);
-  tpl->SetAccessor(String::New("uid"), Profile::GetUid);
-  tpl->SetAccessor(String::New("topRoot"), Profile::GetTopRoot);
-  tpl->SetAccessor(String::New("bottomRoot"), Profile::GetBottomRoot);
-  tpl->Set(String::New("delete"), FunctionTemplate::New(Profile::Delete));
+  tpl->SetAccessor(NanNew<String>("title"), Profile::GetTitle);
+  tpl->SetAccessor(NanNew<String>("uid"), Profile::GetUid);
+  tpl->SetAccessor(NanNew<String>("topRoot"), Profile::GetTopRoot);
+  tpl->SetAccessor(NanNew<String>("bottomRoot"), Profile::GetBottomRoot);
+  tpl->Set(NanNew<String>("delete"), NanNew<FunctionTemplate>(Profile::Delete));
 }
 
 NAN_GETTER(Profile::GetUid) {
